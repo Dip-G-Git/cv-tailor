@@ -1,0 +1,88 @@
+{
+  "name": "unpdf",
+  "type": "module",
+  "version": "2.1.0",
+  "packageManager": "pnpm@12.16.1",
+  "description": "PDF extraction and rendering across all JavaScript runtimes",
+  "author": "Johann Schopplich <hello@johannschopplich.com>",
+  "license": "MIT",
+  "homepage": "https://github.com/unjs/unpdf#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/unjs/unpdf.git"
+  },
+  "bugs": {
+    "url": "https://github.com/unjs/unpdf/issues"
+  },
+  "keywords": [
+    "cloudflare",
+    "edge",
+    "extract",
+    "parse",
+    "pdf",
+    "pdf.js",
+    "pdfjs-dist",
+    "rendering",
+    "serverless",
+    "text-extraction",
+    "workers"
+  ],
+  "sideEffects": false,
+  "imports": {
+    "#pdfjs-decoders": {
+      "workerd": "./dist/pdfjs-decoders-workerd.mjs",
+      "default": "./dist/pdfjs-decoders.mjs"
+    }
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.mts",
+      "default": "./dist/index.mjs"
+    },
+    "./pdfjs": {
+      "types": "./dist/pdfjs.d.mts",
+      "default": "./dist/pdfjs.mjs"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "build": "tsdown && node scripts/post-build.mjs",
+    "build:pdfjs": "rolldown --config pdfjs.rolldown.config.ts && cp -R node_modules/pdfjs-dist/types dist && mkdir -p dist/licenses && cp node_modules/pdfjs-dist/LICENSE dist/licenses/LICENSE_PDFJS && cp node_modules/pdfjs-dist/wasm/LICENSE_*JBIG2 node_modules/pdfjs-dist/wasm/LICENSE_*OPENJPEG dist/licenses",
+    "dev": "tsdown --watch",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "release": "bumpp",
+    "test": "vitest",
+    "test:attw": "attw --pack --profile esm-only",
+    "test:types": "tsc --noEmit",
+    "test:types:dist": "tsc -p test/types/tsconfig.json"
+  },
+  "peerDependencies": {
+    "@napi-rs/canvas": "^0.1.69 || ^1.0.0"
+  },
+  "peerDependenciesMeta": {
+    "@napi-rs/canvas": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "^10.0.0",
+    "@arethetypeswrong/cli": "^0.18.5",
+    "@cloudflare/vitest-plugin": "^1.4.9",
+    "@napi-rs/canvas": "^1.0.13",
+    "@types/node": "^26.6.5",
+    "bumpp": "^12.3.0",
+    "eslint": "^10.13.0",
+    "pdfjs-dist": "~6.4.299",
+    "rolldown": "^1.2.15",
+    "tinyglobby": "^0.2.17",
+    "tsdown": "^0.23.2",
+    "typescript": "^6.0.3",
+    "vitest": "^5.0.5"
+  }
+}

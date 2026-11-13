@@ -1,0 +1,1 @@
+import{t as e}from"./pdfjs-loader.mjs";const t=e({"jbig2_nowasm_fallback.js":()=>import(`./pdfjs-jbig2_nowasm_fallback.mjs`),"openjpeg_nowasm_fallback.js":()=>import(`./pdfjs-openjpeg_nowasm_fallback.mjs`)});export{t as loadDecoder};

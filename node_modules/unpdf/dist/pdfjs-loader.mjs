@@ -1,0 +1,1 @@
+function createDecoderLoader(e){return async t=>{if(!Object.hasOwn(e,t))throw Error(`No bundled decoder for ${t}`);let{default:n}=await e[t]();return n}}export{createDecoderLoader as t};
